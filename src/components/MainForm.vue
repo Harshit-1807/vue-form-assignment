@@ -131,6 +131,30 @@ const removeGroup = (index) => {
     formData.value.groups.splice(index, 1);
   }
 };
+
+// Handle file change
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  if (
+    file &&
+    (file.type === "application/pdf" || file.type.startsWith("image/jpeg"))
+  ) {
+    formData.value.file = file;
+  } else {
+    errorMessage.value = "Only JPEG and PDF files are allowed.";
+  }
+};
+
+// Form submission
+const handleSubmit = async () => {
+  errorMessage.value = "";
+  try {
+    const response = await submitFormData(formData.value);
+    submittedEntries.value.push(response.data);
+  } catch (err) {
+    errorMessage.value = err.response?.data?.message || "Something went wrong!";
+  }
+};
 </script>
 
 <style scoped>
