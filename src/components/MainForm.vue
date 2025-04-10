@@ -84,7 +84,6 @@
       <!-- Submit Button -->
       <button type="submit" class="main-form__submit">Submit</button>
     </form>
-
   </div>
 </template>
 
@@ -121,7 +120,17 @@ const cityOptions = [
   "Lucknow",
 ];
 
+// Add new group
+const addGroup = () => {
+  formData.value.groups.push({ name: "", email: "", mobile: "" });
+};
 
+// Remove a group field
+const removeGroup = (index) => {
+  if (formData.value.groups.length > 2) {
+    formData.value.groups.splice(index, 1);
+  }
+};
 </script>
 
 <style scoped>
